@@ -1,0 +1,27 @@
+📥 Setup & Installation Guide
+1. Arduino Firmware Setup
+Open the Arduino IDE.
+
+Ensure you have the built-in Keyboard library installed.
+
+Open arduino-firmware/LeonardoController.ino.
+
+Select your board (Arduino Leonardo) and correct port under Tools > Board.
+
+Upload the code to your Arduino. (Note: Unplug the HC-05 TX pin temporarily while uploading code over USB if you run into serial conflict upload errors).
+
+2. Android App Setup
+Open Android Studio.
+
+Select Open and choose the android-app/ directory.
+
+Allow Gradle to sync dependencies.
+
+Build and install the application onto your Android device (supports Android 12+ Bluetooth permissions automatically).
+
+💡 Usage
+Power on your hardware system.
+
+Open the Android application and press CONNECT HC-05 to establish serial pairing.
+
+Tap any workflow card to execute the target HID sequence, or use the manual switches at the bottom to control states.
