@@ -1,27 +1,67 @@
-📥 Setup & Installation Guide
-1. Arduino Firmware Setup
-Open the Arduino IDE.
+# 🛠️ Leonardo Controller: Complete Setup & Installation Guide
 
-Ensure you have the built-in Keyboard library installed.
+This comprehensive guide walks you through setting up the hardware wiring, flashing the Arduino firmware, and building the Android companion application for the **Leonardo Controller** project[cite: 5].
 
-Open arduino-firmware/LeonardoController.ino.
+---
 
-Select your board (Arduino Leonardo) and correct port under Tools > Board.
+## 📑 Table of Contents
+1. [Hardware Requirements & Wiring](#1-hardware-requirements--wiring)
+2. [Arduino Firmware Installation](#2-arduino-firmware-installation)
+3. [Android Application Setup](#3-android-application-setup)
+4. [Troubleshooting & Tips](#4-troubleshooting--tips)
 
-Upload the code to your Arduino. (Note: Unplug the HC-05 TX pin temporarily while uploading code over USB if you run into serial conflict upload errors).
+---
 
-2. Android App Setup
-Open Android Studio.
+## 1. Hardware Requirements & Wiring
 
-Select Open and choose the android-app/ directory.
+### Components Needed
+* **Arduino Leonardo** (ATmega32U4 microcontroller required for native USB HID keyboard emulation).
+* **HC-05 Bluetooth Module**.
+* **3x LEDs** (with current-limiting resistors) and **1x Active Buzzer**.
+* Breadboard and jumper wires.
 
-Allow Gradle to sync dependencies.
+### Wiring Reference Table
+| Component | Pin / Terminal | Arduino Leonardo Pin |
+| :--- | :--- | :--- |
+| **HC-05 Module** | TX | `D0 (RX1)` |
+| **HC-05 Module** | GND | `GND` |
+| **HC-05 Module** | VCC | `5V` |
+| **LED 1** | Positive (Anode) | `Pin 8` |
+| **LED 2** | Positive (Anode) | `Pin 9` |
+| **LED 3** | Positive (Anode) | `Pin 10` |
+| **Buzzer** | Positive (+) | `Pin 11` |
 
-Build and install the application onto your Android device (supports Android 12+ Bluetooth permissions automatically).
+---
 
-💡 Usage
-Power on your hardware system.
+## 2. Arduino Firmware Installation
 
-Open the Android application and press CONNECT HC-05 to establish serial pairing.
+The main unified firmware file is located under `arduino-firmware/LeonardoController.ino`[cite: 5].
 
-Tap any workflow card to execute the target HID sequence, or use the manual switches at the bottom to control states.
+1. **Open Arduino IDE**: Launch your Arduino development environment.
+2. **Load Firmware**: Open the `arduino-firmware/LeonardoController.ino` file[cite: 5].
+3. **Configure Board**:
+   * Go to **Tools > Board** and select **Arduino Leonardo**.
+   * Go to **Tools > Port** and select the active COM port assigned to your board.
+4. **Upload**: Click the upload button to flash the sketch.
+   > ⚠️ **Important Hardware Note**: If your HC-05 module is hardwired to `D0 (RX1)` while attempting to upload code via USB, it can cause serial communication conflict errors. **Temporarily disconnect** the HC-05 TX wire from Pin D0 while uploading code, then plug it back in once the upload completes.
+
+---
+
+## 3. Android Application Setup
+
+The full Jetpack Compose Android project source code resides in the `android-app/` directory[cite: 5].
+
+1. **Open Android Studio**: Launch Android Studio on your development machine.
+2. **Open Project**: Select **Open** and browse to select the `android-app/` directory[cite: 5].
+3. **Gradle Sync**: Let Gradle synchronize project dependencies automatically.
+4. **Deploy**: 
+   * Connect your Android phone via USB (ensure USB Debugging is active if deploying directly).
+   * Click the **Run ▶** button in Android Studio, or build a release APK via **Build > Build Bundle(s) / APK(s) > Build APK(s)**.
+5. **Permissions**: When launching the app on Android 12+, approve the runtime Bluetooth scan and connection permission prompts.
+
+---
+
+## 4. Troubleshooting & Tips
+
+* **Bluetooth Connection Fails**: Ensure your HC-05 is successfully paired in your phone's native Bluetooth settings menu before attempting connection inside the app. The app communicates at `9600` baud.
+* **HID Text Mismatch**: Ensure your host computer's active keyboard language profile is set to **English (US)** so that shortcut keys and automated payloads type accurately without layout translation errors.
