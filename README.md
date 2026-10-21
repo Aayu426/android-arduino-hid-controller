@@ -1,3 +1,6 @@
+<img width="480" height="552" alt="image" src="https://github.com/user-attachments/assets/0708c1e9-3758-4853-a5c0-8d0f45e4af18" />
+
+
 # 🛡️ Leonardo Controller // HID Terminal & Bluetooth Automation
 
 An advanced physical computing project featuring an **Android Jetpack Compose** companion application that communicates wirelessly via an **HC-05 Bluetooth module** to an **Arduino Leonardo**[cite: 5]. 
